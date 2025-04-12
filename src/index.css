@@ -1,0 +1,468 @@
+/* frontend/src/index.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+
+/* Define Base Color Variables (Slightly Adjusted Dark Theme) */
+:root {
+    /* Fonts */
+    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Font utama */
+    
+    /* Backgrounds */
+    --bg-main: #121212;          /* Background utama sedikit lebih gelap */
+    --bg-content: #1e1e1e;       /* Background untuk kartu, searchbar, dll. */
+    --bg-chat-history: #1a1a1a;  /* Background area chat */
+    --bg-input: #2a2a2a;          /* Background input fields */
+    --bg-input-focus: #333333;   /* Background input saat focus */
+    --bg-message-user: #005c9e; /* Biru lebih gelap untuk user */
+    --bg-message-model: #303030; /* Abu-abu lebih gelap untuk model/AI */
+    --bg-hover-subtle: rgba(255, 255, 255, 0.05); /* Efek hover transparan */
+  
+    /* Text */
+    --text-main: #e0e0e0;        /* Putih keabu-abuan untuk teks utama */
+    --text-muted: #b8b8b8;       /* Abu-abu SANGAT terang untuk teks muted */ 
+    --text-on-primary: #ffffff; 
+    --text-on-dark-bg: var(--text-main); 
+    --text-heading: #ffffff;     /* Putih cerah untuk heading */
+  
+    /* Borders */
+    --border-main: #353535;       /* Border sedikit lebih terang */
+    --border-input: #444444;      
+    --border-input-focus: var(--color-primary); /* Border focus pakai warna primary */
+    --border-divider: var(--border-main); /* Untuk <hr> atau pemisah */
+  
+    /* Accent Colors (Bootstrap defaults or slightly adjusted) */
+    --color-primary: #2563eb;   /* Biru sedikit berbeda */
+    --color-success: #16a34a;   /* Hijau sedikit berbeda */
+    --color-info: #0ea5e9;      /* Cyan sedikit berbeda */
+    --color-danger: #dc2626;    /* Merah sedikit berbeda */
+    --color-secondary: #64748b;  /* Abu-biru */
+    --color-outline-light: #f1f5f9; 
+  
+    /* Shadows & Radius */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --border-radius-sm: 0.25rem; /* 4px */
+    --border-radius-md: 0.5rem;  /* 8px */
+    --border-radius-lg: 0.75rem; /* 12px */
+
+    /* Transitions */
+    --transition-fast: 150ms ease-in-out;
+    --transition-base: 250ms ease-in-out;
+}
+  
+/* --- Base Styles --- */
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: var(--font-sans); /* Terapkan font utama */
+    margin: 0; 
+    line-height: 1.6; /* Tingkatkan sedikit line-height untuk keterbacaan */
+    -webkit-font-smoothing: antialiased; /* Font smoothing di Webkit */
+    -moz-osx-font-smoothing: grayscale;  /* Font smoothing di Firefox */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--text-heading); /* Warna heading berbeda */
+    margin-top: 1.5em;
+    margin-bottom: 0.75em;
+}
+
+p {
+    margin-bottom: 1em;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+a:hover {
+    color: #60a5fa; /* Warna hover link lebih terang */
+    text-decoration: underline;
+}
+  
+/* --- Bootstrap/Component Overrides & Adjustments --- */
+
+/* Override background utilities */
+.bg-dark { background-color: var(--bg-content) !important; } /* Navbar bg */
+/* Tambahkan override lain jika perlu */
+
+/* Borders */
+.border { border-color: var(--border-main) !important; }
+.border-secondary { border-color: var(--border-main) !important; }
+hr { border-color: var(--border-divider); opacity: 0.5;}
+
+/* Forms */
+.form-control, .form-select {
+    background-color: var(--bg-input);
+    color: var(--text-main);
+    border-color: var(--border-input);
+    border-radius: var(--border-radius-sm);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+.form-control:focus, .form-select:focus {
+    background-color: var(--bg-input-focus);
+    color: var(--text-main);
+    border-color: var(--border-input-focus); /* Warna primary saat focus */
+    box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25); /* Shadow focus biru */
+    outline: none; /* Hapus outline default */
+}
+.form-control::placeholder { 
+    color: var(--text-muted); /* Menggunakan warna muted yang sudah diubah */
+    opacity: 0.7; 
+}
+
+/* Buttons */
+.btn {
+    border-radius: var(--border-radius-sm);
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+    font-weight: 500; /* Sedikit lebih tebal */
+}
+.btn:focus {
+     box-shadow: 0 0 0 0.2rem rgba(var(--bs-btn-focus-shadow-rgb), .5); /* Gunakan variabel shadow bootstrap jika ada */
+}
+.btn:hover {
+    transform: translateY(-1px); /* Efek naik sedikit saat hover */
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--text-on-primary);
+}
+.btn-primary:hover {
+    background-color: #1d4ed8; /* Warna hover lebih gelap */
+    border-color: #1d4ed8;
+}
+/* Style override serupa untuk .btn-success, .btn-info, .btn-danger, .btn-secondary, .btn-outline-light jika perlu */
+.btn-outline-light {
+    border-color: var(--border-main);
+    color: var(--text-main);
+}
+.btn-outline-light:hover {
+    background-color: var(--bg-hover-subtle);
+    border-color: #aaa;
+    color: #fff;
+}
+
+/* --- Layout --- */
+html, body, #root {
+    height: 100%;
+}
+#root {
+    display: flex; 
+    flex-direction: column; 
+}
+.container-fluid {
+    /* Mungkin perlu penyesuaian padding */
+}
+  
+/* --- Komponen Spesifik --- */
+
+/* Navbar */
+.navbar {
+   box-shadow: none;
+   border-bottom: 1px solid var(--border-divider);
+}
+.navbar-brand {
+    font-weight: 700; /* Lebih tebal */
+}
+.navbar-text {
+    /* Warna nama user dll di navbar */
+    color: var(--text-muted) !important; /* Gunakan warna muted baru */
+}
+.navbar-text strong {
+    color: var(--text-main) !important; 
+}
+
+/* Search Bar */
+.search-container {
+    background-color: var(--bg-content);
+    border-radius: var(--border-radius-md); 
+    border-color: transparent; 
+    box-shadow: var(--shadow-sm);
+}
+
+/* Search Results / Video Details Area */
+/* .results-container { /* Ganti nama kelas pembungkus jika perlu */
+/*     background-color: var(--bg-content); */
+/*     border-radius: var(--border-radius-md); */
+/* } */
+
+/* Card (Video & Artikel) */
+.card.video-card, 
+.card.article-card {
+    background-color: var(--bg-content); 
+    border: 1px solid var(--border-main);
+    border-radius: var(--border-radius-md); 
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-base), box-shadow var(--transition-base);
+    overflow: hidden; 
+}
+.card.video-card:hover,
+.card.article-card:hover {
+    transform: translateY(-4px); 
+    box-shadow: var(--shadow-md); 
+    border-color: #555; 
+}
+.card .card-title a { 
+    color: var(--text-heading); 
+}
+.card .card-title a:hover {
+    color: var(--color-primary);
+    text-decoration: none;
+}
+.card .text-muted { /* Pastikan text-muted di dalam card juga pakai warna baru */
+    color: var(--text-muted) !important; 
+}
+
+/* Video Details Card */
+.video-details-container .card {
+    background-color: var(--bg-content); 
+    border-radius: var(--border-radius-lg); 
+    border: none; 
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+}
+.video-details-container .card-img-top {
+    border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0; 
+    border-bottom: 1px solid var(--border-divider);
+}
+.video-details-container .text-muted { /* Metadata di detail video */
+    color: var(--text-muted) !important;
+}
+.video-details-container pre { 
+    background-color: var(--bg-input); 
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    font-size: 0.9em;
+    color: var(--text-muted); /* Deskripsi video pakai warna muted */
+}
+
+/* Accordion (Transcript & Comments) */
+.accordion-item {
+    background-color: transparent; 
+    border: none;
+    border-bottom: 1px solid var(--border-divider); 
+}
+.accordion-item:last-child {
+    border-bottom: none; 
+}
+.accordion-button {
+    background-color: transparent !important;
+    color: var(--text-main) !important;
+    font-weight: 500;
+    padding: 1rem 1.25rem;
+    border-radius: 0 !important; 
+}
+.accordion-button:focus {
+    box-shadow: none; 
+}
+.accordion-button:not(.collapsed) { 
+    color: var(--color-primary) !important; 
+    box-shadow: none;
+}
+/* .accordion-button::after { } */
+.accordion-body {
+    background-color: var(--bg-chat-history); 
+    padding: 1rem 1.25rem;
+    /* border-radius: 0 0 var(--border-radius-md) var(--border-radius-md); */ /* Mungkin tidak perlu jika accordion item tidak punya border */
+}
+.accordion-body .text-muted { /* Teks muted di dalam accordion body */
+     color: var(--text-muted) !important;
+}
+
+
+/* Comment Section */
+.comment-section .comment {
+    border-bottom-color: var(--border-divider);
+    padding: 0.75rem 0;
+}
+.comment-section .replies {
+   border-left-color: var(--border-divider);
+   margin-left: 1rem; 
+   padding-left: 1rem;
+}
+.comment-section .text-muted { /* Metadata komentar/reply */
+    color: var(--text-muted) !important;
+}
+
+/* Chat Window */
+/* .chat-container { /* Ganti nama kelas pembungkus jika perlu */
+/*      background-color: var(--bg-content); */
+/*      border-radius: var(--border-radius-md); */
+/*      border-color: transparent; */
+/*      box-shadow: var(--shadow-sm); */
+/* } */
+
+/* Chat History Area */
+#chatHistoryDisplay { 
+    background-color: var(--bg-chat-history);
+    border-color: var(--border-main);
+    border-radius: var(--border-radius-sm);
+}
+#chatHistoryDisplay .text-muted { /* Placeholder chat history */
+     color: var(--text-muted) !important;
+}
+
+
+/* Chat Messages */
+.chat-message {
+    margin-bottom: 0.75rem; 
+    padding: 0.6rem 1rem;   
+    border-radius: var(--border-radius-lg); 
+    max-width: 80%; 
+    word-wrap: break-word;
+    line-height: 1.5;
+}
+.user-message {
+    background-color: var(--bg-message-user);
+    color: var(--text-on-primary);
+    margin-left: auto; 
+    border-bottom-right-radius: var(--border-radius-sm); 
+}
+.model-message {
+    background-color: var(--bg-message-model);
+    color: var(--text-main);
+    margin-right: auto; 
+    border-bottom-left-radius: var(--border-radius-sm); 
+}
+/* Style untuk elemen dalam model message (hasil markdown) */
+.model-message p:last-child { margin-bottom: 0; }
+.model-message code { 
+    background-color: rgba(0,0,0,0.2); 
+    padding: 0.2em 0.4em; 
+    border-radius: 3px; 
+    font-size: 0.9em;
+    color: #f0f0f0; /* Warna teks code lebih terang */
+}
+.model-message pre {
+    background-color: rgba(0,0,0,0.3);
+    padding: 0.8em;
+    border-radius: var(--border-radius-sm);
+    overflow-x: auto;
+    color: #d0d0d0; /* Warna teks pre */
+}
+.model-message pre code {
+    background-color: transparent;
+    padding: 0;
+    color: inherit; /* Warisi warna dari pre */
+}
+.model-message blockquote {
+    border-left: 3px solid var(--color-secondary);
+    padding-left: 0.8em;
+    margin-left: 0;
+    color: var(--text-muted); /* Blockquote pakai warna muted */
+}
+.model-message ul, .model-message ol {
+    padding-left: 1.5em;
+}
+.model-message a { /* Link dalam pesan AI */
+    color: #93c5fd; /* Biru lebih terang untuk link di bg gelap */
+}
+.model-message a:hover {
+    color: #e0f2fe;
+}
+
+
+.system-message {
+    font-style: italic;
+    color: var(--text-muted); /* System message pakai warna muted */
+    text-align: center;
+    max-width: 100%;
+    font-size: 0.85em;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--bg-input); 
+    margin: 0.5rem auto; 
+}
+
+/* Chat Input */
+/* .chat-container .input-group { /* Target input group di dalam chat container */
+/*    margin-top: 1rem; */
+/* } */
+.col-lg-5 .input-group { /* Lebih spesifik mentarget input group di kolom chat */
+    margin-top: 1rem;
+}
+.col-lg-5 .input-group .form-control {
+    border-right: none; 
+}
+.col-lg-5 .input-group .btn {
+    border-left: none; 
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-content) !important; 
+    border-top: 1px solid var(--border-divider);
+    color: var(--text-muted); /* Footer pakai warna muted */
+}
+
+/* --- Scrollbar Styling (Opsional, Webkit only) --- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-input);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary);
+  border-radius: 4px;
+  border: 2px solid var(--bg-input); 
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #818cf8; 
+}
+
+/* --- Responsive Adjustments (Contoh) --- */
+/* @media (max-width: 991.98px) { ... } */
+
+/* Tambahan */
+
+/* Styling untuk react-bootstrap Tabs */
+.results-container { /* Target container di App.jsx */
+    display: flex; /* Memungkinkan Tabs mengisi tinggi */
+    flex-direction: column;
+    padding: 0; /* Hapus padding container jika Tabs sudah punya */
+    border: none; /* Hapus border container jika Tabs sudah punya */
+    border-radius: var(--border-radius-md); /* Terapkan radius di sini */
+    overflow: hidden; /* Sembunyikan overflow */
+}
+
+.search-tabs { /* Target kelas custom pada <Tabs> */
+    flex-shrink: 0; /* Jangan biarkan nav tabs menyusut */
+    border-bottom: 1px solid var(--border-divider); /* Garis bawah untuk nav */
+    background-color: var(--bg-content); /* Background nav tabs */
+}
+
+.search-tabs .nav-link { /* Tombol tab */
+    color: var(--text-muted);
+    border-radius: 0 !important; /* Hapus radius default */
+    border: none !important; /* Hapus border default */
+    padding: 0.75rem 1rem;
+    font-weight: 500;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.search-tabs .nav-link.active { /* Tombol tab aktif */
+    color: var(--color-primary) !important; /* Warna teks aktif */
+    border-bottom: 2px solid var(--color-primary) !important; /* Garis bawah aktif */
+    background-color: transparent !important; /* Hapus background aktif default */
+}
+
+.search-tabs .nav-link:hover {
+    color: var(--text-main); /* Warna hover */
+    border-bottom-color: transparent !important; /* Hapus border hover default jika ada */
+}
+
+.tab-content { /* Area konten di bawah tabs */
+    flex-grow: 1; /* Ambil sisa tinggi */
+    overflow-y: auto; /* Scroll hanya di area konten */
+    background-color: var(--bg-content); /* Background konten */
+}
+
+/* Sesuaikan padding/margin di dalam tab jika perlu */
+.tab-pane .p-2 { /* Target padding di dalam konten tab */
+    /* Mungkin bisa disesuaikan */
+}
